@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/main">
+  <fragment
+      android:id="@+id/main"
+      android:name="com.lee.android.music.MainFragment">
+    <!--<action-->
+        <!--android:id="@+id/action_mainFragment_to_pilesFragment"-->
+        <!--app:destination="@id/piles"-->
+        <!--app:enterAnim="@anim/anim_enter"-->
+        <!--app:exitAnim="@anim/anim_exit"-->
+        <!--app:popEnterAnim="@anim/anim_pop_enter"-->
+        <!--app:popExitAnim="@anim/anim_pop_exit"/>-->
+  </fragment>
+
+</navigation>

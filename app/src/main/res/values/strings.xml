@@ -1,3 +1,10 @@
 <resources>
   <string name="app_name">LeeMusic</string>
+  <string name="function">功能</string>
+  <string name="other">其他</string>
+  <string name="setting">设置</string>
+  <string name="about">关于</string>
+  <string name="equalizer">均衡器</string>
+  <string name="playlist">播放列表</string>
+  <string name="loading">正在加载</string>
 </resources>
