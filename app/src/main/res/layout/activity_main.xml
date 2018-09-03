@@ -24,30 +24,34 @@
           android:fitsSystemWindows="true"
           app:layout_scrollFlags="scroll|enterAlways"
           />
-      <android.support.design.widget.TabLayout
+      <com.qmuiteam.qmui.widget.QMUITabSegment
           android:id="@+id/tabs"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="49dp"
           android:layout_alignParentBottom="true"
           android:background="@color/app_color_white"
-          app:tabIndicatorColor="?attr/app_primary_color"
-          app:tabIndicatorHeight="4dp"
-          app:tabSelectedTextColor="?attr/app_primary_color"
-          app:tabTextColor="@color/text_primary"/>
+          />
 
     </android.support.design.widget.AppBarLayout>
-    <fragment
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/my_nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <!--<fragment-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/my_nav_host_fragment"-->
+    <!--android:name="androidx.navigation.fragment.NavHostFragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:defaultNavHost="true"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    <!--app:navGraph="@navigation/nav_graph"-->
+    <!--tools:context=".MainActivity"-->
+    <!--/>-->
+
+    <com.qmuiteam.qmui.widget.QMUIViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:navGraph="@navigation/nav_graph"
-        tools:context=".MainActivity"
         />
   </android.support.design.widget.CoordinatorLayout>
   <android.support.design.widget.NavigationView

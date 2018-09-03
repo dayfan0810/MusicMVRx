@@ -12,6 +12,7 @@ import com.lee.android.music.code.MvRxEpoxyController
 import com.lee.android.music.code.simpleController
 import com.lee.android.music.code.toast
 import com.lee.android.music.views.basicRow
+import kotlinx.android.synthetic.main.fragment_base_epoxy_mvrx.swipeRefreshLayout
 import timber.log.Timber
 
 /**
@@ -27,10 +28,15 @@ class MainFragment : BaseEpoxyFragment() {
   ) {
 //    super.onViewCreated(view, savedInstanceState)
     topBarLayout.visibility = View.GONE
+    swipeRefreshLayout.setColorSchemeResources(R.color.app_color_blue)
     viewModel.asyncSubscribe(MainState::musics, onFail = { error ->
       toast("musics is fail")
+      swipeRefreshLayout.isRefreshing = false
       Timber.w(error)
     })
+    swipeRefreshLayout.setOnRefreshListener {
+      viewModel.musics()
+    }
   }
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,8 +51,10 @@ class MainFragment : BaseEpoxyFragment() {
           id("music$index")
           title(playlistsItem.name)
           subtitle(playlistsItem.description)
+          image(playlistsItem.coverImgUrl)
         }
       }
+      swipeRefreshLayout.isRefreshing = false
     }
 
   }

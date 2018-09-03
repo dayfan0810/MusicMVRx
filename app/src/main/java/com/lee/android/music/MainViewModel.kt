@@ -27,7 +27,7 @@ class MainViewModel(
     musics()
   }
 
-  private fun musics() = withState { state ->
+  fun musics() = withState { state ->
     netEaseService.getTopPlaylist("流行", 20)
         .execute { copy(musics = it) }
   }
