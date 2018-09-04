@@ -12,6 +12,7 @@ import com.lee.android.music.code.MvRxEpoxyController
 import com.lee.android.music.code.simpleController
 import com.lee.android.music.code.toast
 import com.lee.android.music.views.basicRow
+import com.lee.android.music.views.loadMoreRow
 import kotlinx.android.synthetic.main.fragment_base_epoxy_mvrx.swipeRefreshLayout
 import timber.log.Timber
 
@@ -29,13 +30,13 @@ class MainFragment : BaseEpoxyFragment() {
 //    super.onViewCreated(view, savedInstanceState)
     topBarLayout.visibility = View.GONE
     swipeRefreshLayout.setColorSchemeResources(R.color.app_color_blue)
-    viewModel.asyncSubscribe(MainState::musics, onFail = { error ->
+    viewModel.asyncSubscribe(MainState::request, onFail = { error ->
       toast("musics is fail")
       swipeRefreshLayout.isRefreshing = false
       Timber.w(error)
     })
     swipeRefreshLayout.setOnRefreshListener {
-      viewModel.musics()
+      viewModel.fetchNextPage()
     }
   }
 
@@ -44,18 +45,30 @@ class MainFragment : BaseEpoxyFragment() {
   }
 
   override fun epoxyController() = simpleController(viewModel) { state ->
-    val musics = state.musics.invoke()
-    if (musics?.playlists != null && musics.playlists.isNotEmpty()) {
-      musics.playlists.forEachIndexed { index, playlistsItem ->
-        basicRow {
-          id("music$index")
-          title(playlistsItem.name)
-          subtitle(playlistsItem.description)
-          image(playlistsItem.coverImgUrl)
-        }
+    //    val musics = state.request.invoke()
+//    if (musics?.playlists != null && musics.playlists.isNotEmpty()) {
+//      musics.playlists.forEachIndexed { index, playlistsItem ->
+//        basicRow {
+//          id("music$index")
+//          title(playlistsItem.name)
+//          subtitle(playlistsItem.description)
+//          image(playlistsItem.coverImgUrl)
+//        }
+//      }
+    state.musics.forEachIndexed { index, music ->
+      basicRow {
+        id("music$index")
+        title(music.name)
+        subtitle(music.description)
+        image(music.coverImgUrl)
       }
-      swipeRefreshLayout.isRefreshing = false
     }
-
+    swipeRefreshLayout.isRefreshing = false
+    if (state.musics.size>3)
+    loadMoreRow {
+      id("loading${state.musics.size}")
+      onBind { _, _, _ -> viewModel.fetchNextPage() }
+    }
   }
+
 }
